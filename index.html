@@ -5,13 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>As Nossas Cartas</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
     <style>
         body {
-            background-color: #020617; /* Fundo escuro elegante */
-            font-family: 'Caveat', cursive;
+            background-color: #020617;
+            /* Fonte padrão limpa para menus e botões */
+            font-family: 'Inter', sans-serif;
             margin: 0;
             overflow: hidden; 
+        }
+
+        /* Títulos elegantes */
+        h1, h2, .header-titulo {
+            font-family: 'Playfair Display', serif;
         }
 
         /* --- MENUS E TRANSIÇÕES --- */
@@ -42,12 +50,12 @@
             box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.3);
         }
 
-        /* --- ENVELOPE (DESIGN PREMIUM) --- */
+        /* --- ENVELOPE (DESIGN REALISTA) --- */
         .envelope-container {
             position: relative;
             width: 90vw;
-            max-width: 380px;
-            height: 240px;
+            max-width: 400px; /* Um pouco mais largo para proporção real */
+            height: 250px;
             perspective: 1200px;
             cursor: pointer;
             transition: transform 0.3s ease;
@@ -56,65 +64,75 @@
 
         .env-back {
             position: absolute; inset: 0;
-            background-color: #0a192f; 
-            border-radius: 6px;
-            box-shadow: 0 25px 35px -5px rgba(0, 0, 0, 0.7);
+            background-color: #0d2347; /* Azul profundo no interior */
+            border-radius: 4px;
+            box-shadow: 0 25px 35px -5px rgba(0, 0, 0, 0.8);
             z-index: 1;
         }
 
         .env-letter-stub {
-            position: absolute; bottom: 8px; left: 4%;
-            width: 92%; height: 200px;
-            background-color: #e8d5b5; 
-            background-image: repeating-linear-gradient(transparent, transparent 30px, rgba(0,0,0,0.15) 31px);
+            position: absolute; bottom: 8px; left: 3%;
+            width: 94%; height: 210px;
+            background-color: #f3e8d6; /* Papel ligeiramente mais claro */
+            background-image: repeating-linear-gradient(transparent, transparent 30px, rgba(0,0,0,0.1) 31px);
             border-radius: 4px; z-index: 2;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.4);
         }
 
+        /* Painéis do envelope com gradientes e sombras para dar espessura ao papel */
         .env-left {
             position: absolute; top: 0; left: 0;
             width: 50.5%; height: 100%;
-            background-color: #1a4279; 
+            /* Gradiente para simular dobra e sombra */
+            background: linear-gradient(to right, #1a4279, #143563); 
             clip-path: polygon(0 0, 100% 50%, 0 100%); z-index: 3;
-            border-bottom-left-radius: 6px;
+            border-bottom-left-radius: 4px;
+            box-shadow: inset -5px 0 10px rgba(0,0,0,0.1);
         }
 
         .env-right {
             position: absolute; top: 0; right: 0;
             width: 50.5%; height: 100%;
-            background-color: #143563; 
+            background: linear-gradient(to left, #1a4279, #102d57); 
             clip-path: polygon(100% 0, 100% 100%, 0 50%); z-index: 3;
-            border-bottom-right-radius: 6px;
+            border-bottom-right-radius: 4px;
+            box-shadow: inset 5px 0 10px rgba(0,0,0,0.1);
         }
 
         .env-bottom {
             position: absolute; bottom: 0; left: 0;
             width: 100%; height: 51%;
-            background-color: #12315b; 
+            /* Gradiente de baixo para cima simula a lombada inferior */
+            background: linear-gradient(to top, #143563, #1e4b8a); 
             clip-path: polygon(0 100%, 50% 0, 100% 100%); z-index: 4;
-            border-bottom-left-radius: 6px; border-bottom-right-radius: 6px;
+            border-bottom-left-radius: 4px; border-bottom-right-radius: 4px;
+            /* Sombra superior suave que projeta nos painéis laterais */
+            filter: drop-shadow(0 -3px 3px rgba(0,0,0,0.3)); 
         }
 
         .env-flap-wrapper {
             position: absolute; top: 0; left: 0;
-            width: 100%; height: 51%; transform-origin: top; z-index: 5;
+            width: 100%; height: 55%; /* Aba ligeiramente maior que o meio */
+            transform-origin: top; z-index: 5;
+            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.4)); /* Sombra da aba no corpo */
         }
 
         .env-flap {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: #1f4b87; 
+            background: linear-gradient(to bottom, #1e4b8a, #23559c); 
             clip-path: polygon(0 0, 100% 0, 50% 100%);
-            border-top-left-radius: 6px; border-top-right-radius: 6px;
+            border-top-left-radius: 4px; border-top-right-radius: 4px;
         }
 
         .wax-seal {
-            position: absolute; bottom: -20px; left: 50%;
-            transform: translateX(-50%); width: 44px; height: 44px;
-            background: radial-gradient(circle at 30% 30%, #dc2626, #991b1b, #7f1d1d);
+            position: absolute; bottom: -18px; left: 50%;
+            transform: translateX(-50%); width: 48px; height: 48px;
+            background: radial-gradient(circle at 35% 35%, #ef4444, #b91c1c, #7f1d1d);
             border-radius: 50%;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.3);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.6), inset 0 2px 5px rgba(255,255,255,0.3);
             display: flex; align-items: center; justify-content: center;
-            color: #fca5a5; font-size: 22px; font-style: normal;
+            color: #fecaca; font-size: 20px; font-family: sans-serif;
+            border: 2px solid #991b1b;
         }
 
         /* Animações Envelope */
@@ -126,18 +144,19 @@
 
         /* --- FOLHA E TEXTO --- */
         .paper-lines {
-            background-color: #e8d5b5; 
-            background-image: repeating-linear-gradient(transparent, transparent 30px, rgba(0, 0, 0, 0.4) 31px);
+            background-color: #f3e8d6; /* Papel mais suave */
+            background-image: repeating-linear-gradient(transparent, transparent 32px, rgba(0, 0, 0, 0.15) 33px);
             background-attachment: local; 
-            padding: 31px 24px;
-            line-height: 31px; 
-            font-size: 24px;
-            color: #1e293b;
+            padding: 33px 24px;
+            line-height: 33px; /* Ajustado para a nova fonte */
+            font-size: 19px;
+            color: #334155;
+            font-family: 'Lora', serif; /* Fonte de leitura clássica e legível */
         }
 
-        .header-capitulo { text-align: center; font-size: 22px; font-weight: 700; line-height: 31px; text-transform: uppercase; letter-spacing: 2px; color: #475569; }
-        .header-titulo { text-align: center; font-size: 38px; font-weight: 700; line-height: 62px; color: #0f172a; }
-        .header-data { text-align: right; font-size: 20px; line-height: 31px; color: #64748b; margin-bottom: 31px; }
+        .header-capitulo { text-align: center; font-size: 24px; font-weight: 700; line-height: 33px; text-transform: uppercase; letter-spacing: 2px; color: #475569; font-family: 'Playfair Display', serif; }
+        .header-titulo { text-align: center; font-size: 32px; font-weight: 700; line-height: 66px; color: #0f172a; margin-bottom: 0;}
+        .header-data { text-align: right; font-size: 16px; line-height: 33px; color: #94a3b8; margin-bottom: 0; font-family: 'Inter', sans-serif; font-style: italic;}
 
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -147,10 +166,10 @@
 
     <!-- ECRÃ 1: MENU PRINCIPAL -->
     <div id="screen-menu" class="screen">
-        <h1 class="text-4xl text-slate-200 mb-2 font-bold">As Nossas Cartas</h1>
-        <p class="text-slate-500 mb-8 font-sans text-sm tracking-widest uppercase">Escolhe uma data para ler</p>
+        <h1 class="text-4xl text-slate-100 mb-2 font-bold tracking-tight">Páginas do Nosso Amor</h1>
+        <p class="text-slate-400 mb-10 text-sm tracking-widest uppercase font-medium">Escolhe uma memória para ler</p>
         
-        <!-- Lista de Cartas (Preenchida pelo JS) -->
+        <!-- Lista de Cartas -->
         <div id="menu-list" class="w-full max-w-md px-6 flex flex-col gap-4 overflow-y-auto hide-scrollbar max-h-[70vh]">
             <!-- Os botões entram aqui -->
         </div>
@@ -159,15 +178,15 @@
     <!-- ECRÃ 2: ENVELOPE -->
     <div id="screen-envelope" class="screen hidden-screen">
         <!-- Botão Voltar -->
-        <button id="btn-voltar" class="absolute top-8 left-6 text-slate-400 hover:text-white font-sans text-sm flex items-center gap-2 transition-colors z-10 uppercase tracking-wider font-bold">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+        <button id="btn-voltar" class="absolute top-8 left-6 text-slate-400 hover:text-white text-sm flex items-center gap-2 transition-colors z-10 uppercase tracking-widest font-semibold">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
             Voltar
         </button>
 
         <!-- Envelope Animado -->
         <div id="envelope" class="envelope-container">
-            <div class="instruction absolute -top-16 w-full text-center tracking-widest uppercase font-bold text-slate-400 text-sm transition-opacity duration-300">
-                A tua carta chegou<br><span class="text-xs font-normal opacity-70">Toque para abrir</span>
+            <div class="instruction absolute -top-20 w-full text-center tracking-widest uppercase font-bold text-slate-400 text-sm transition-opacity duration-300">
+                A tua carta chegou<br><span class="text-xs font-medium opacity-70 normal-case tracking-normal text-slate-500 mt-1 block">Toca no envelope para abrir</span>
             </div>
             
             <div class="env-back"></div>
@@ -176,8 +195,8 @@
             <div class="env-right"></div>
             <div class="env-bottom"></div>
             <div class="env-flap-wrapper">
-                <div class="env-flap shadow-sm"></div>
-                <div class="wax-seal">❤</div>
+                <div class="env-flap"></div>
+                <div class="wax-seal">♥</div>
             </div>
         </div>
     </div>
@@ -202,31 +221,30 @@
 
     <script>
         // --- 1. BANCO DE DADOS DAS CARTAS ---
-        // Podes adicionar quantas cartas quiseres aqui!
         const cartas = [
             {
                 id: 1,
-                dataCurta: "21/08",
-                dataLonga: "21 de Agosto de 2026",
-                capitulo: "Capítulo 1",
-                titulo: "O Início de Tudo",
-                texto: "Meu amor,<br><br>Hoje é o dia 21, e não podia deixar de escrever. Lembras-te de quando começámos esta jornada? Parecia apenas um detalhe, mas tornou-se no nosso mundo inteiro.<br><br>Esta é a primeira carta do nosso menu interativo. Agora as cartas estão organizadas e podes escolher qual queres ler.<br><br>Amo-te muito."
+                dataCurta: "23/08",
+                dataLonga: "23 de Agosto de 2026",
+                capitulo: "Capítulo 23",
+                titulo: "As minhas promessas (Pt. 1)",
+                texto: "Meu xuxu,<br>Prometo que a nossa vida nunca perderá a leveza e a alegria que construímos desde aquele nosso primeiro lanche juntos. Quero continuar sendo o seu maior parceiro de todas as horas, criando as melhores cabanas com o Fred na sala e celebrando cada pequena conquista nossa com um gelato na Borelli. O meu compromisso diário é fazer você sorrir, valorizando as suas dancinhas no banho, as suas teorias loucas depois de um filme e esse seu jeito espontâneo que me conquistou. Prometo que o nosso bom humor, aquele nosso jeito único de conversar sobre tudo, será sempre o nosso maior refúgio. Estarei sempre aqui para cuidar de você, te proteger e te amar mil milhões, em cada pequeno detalhe da nossa rotina.<br><br>Com amor,<br> Murilo Augusto Ribeiro Venturato"
             },
             {
                 id: 2,
-                dataCurta: "23/08",
-                dataLonga: "23 de Agosto de 2026",
-                capitulo: "Capítulo 15",
-                titulo: "Saudades Tuas",
-                texto: "Meu amor,<br><br>O dia de hoje foi longo e tudo o que eu queria era o teu abraço. O tempo passa devagar quando não estamos juntos.<br><br>Fiz questão de guardar este momento nesta carta, para que saibas que estás nos meus pensamentos a cada segundo do dia.<br><br>Volta rápido."
+                dataCurta: "24/08",
+                dataLonga: "24 de Agosto de 2026",
+                capitulo: "Capítulo 24",
+                titulo: "As minhas promessas (Pt. 2)",
+                texto: "Meu mozão,<br>Prometo cuidar de você com a mesma dedicação, empatia e amor puro que você sempre entrega a todos ao seu redor. Assim como você tem um coração gigante, eu prometo doar o meu melhor para ser o companheiro que você merece. Prometo ser um motivo de orgulho para os seus pais e valorizar sempre a mulher incrível e forte que você é. Eu prometo estar ao seu lado não apenas nos dias de glória, mas principalmente naqueles momentos difíceis em que você sentir que está com apenas dez por cento da sua energia. Prometo que o nosso amor será sempre paciente e bondoso, formando aquele cordão de três dobras que jamais se romperá. Eu sempre serei o seu abraço mais seguro.<br><br>Com amor,<br> Murilo Augusto Ribeiro Venturato"
             },
             {
                 id: 3,
                 dataCurta: "25/08",
                 dataLonga: "25 de Agosto de 2026",
-                capitulo: "Capítulo 23",
-                titulo: "A Nossa História",
-                texto: "Meu amor,<br><br>Aqui está o design final que construímos. Um menu elegante, um envelope safira perfeito e uma folha onde cada palavra assenta milimetricamente nas linhas.<br><br>Sempre que sentires saudades, basta abrires este link, escolheres a data e leres o que tenho para te dizer.<br><br>Com todo o meu coração,<br>O teu amor."
+                capitulo: "Capítulo 25",
+                titulo: "As minhas promessas (Pt. 3)",
+                texto: "Minha vida,<br>Prometo que a nossa tão sonhada viagem para Buenos Aires será apenas a primeira de muitas luas de mel e aventuras que viveremos lado a lado. Se eu precisei de quatro pedidos de namoro para chegar até aqui, prometo continuar escolhendo você e renovando o meu "sim" todos os dias da minha vida. E prometo até me esforçar para não estragar mais as minhas próprias surpresas antes da hora! A partir de agora, não apenas moraremos na mesma casa, nós viveremos juntos de verdade. Prometo continuar buscando ser um homem cada vez melhor para construirmos a família que sempre sonhamos. O meu coração é inteiramente seu, e eu não vejo a hora de me casar com você.<br>Com amor,<br> Murilo Augusto Ribeiro Venturato"
             }
         ];
 
@@ -252,25 +270,23 @@
         function renderMenu() {
             menuList.innerHTML = ''; // Limpa a lista
             cartas.forEach((carta, index) => {
-                // Criação do botão de cada carta
                 const btn = document.createElement('button');
-                btn.className = 'menu-card w-full p-4 rounded-xl flex items-center justify-between text-left cursor-pointer';
+                btn.className = 'menu-card w-full p-5 rounded-2xl flex items-center justify-between text-left cursor-pointer border border-slate-700/50 hover:border-blue-500/50';
                 btn.innerHTML = `
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-full bg-blue-900/50 flex items-center justify-center text-blue-400 font-sans shadow-inner border border-blue-800/50">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                    <div class="flex items-center gap-5">
+                        <div class="w-12 h-12 rounded-full bg-blue-900/30 flex items-center justify-center text-blue-400 shadow-inner border border-blue-500/20">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                         </div>
                         <div>
-                            <h2 class="text-xl text-white m-0 leading-none">${carta.titulo}</h2>
-                            <span class="text-sm text-slate-400 font-sans tracking-widest uppercase mt-1 inline-block">Carta do dia ${carta.dataCurta}</span>
+                            <h2 class="text-xl text-slate-100 m-0 leading-none font-semibold font-serif">${carta.titulo}</h2>
+                            <span class="text-xs text-slate-500 tracking-wider uppercase mt-2 inline-block font-medium">Carta do dia ${carta.dataCurta}</span>
                         </div>
                     </div>
-                    <div class="text-slate-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                    <div class="text-slate-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                     </div>
                 `;
                 
-                // Ao clicar, prepara a carta e muda de ecrã
                 btn.addEventListener('click', () => abrirEnvelope(index));
                 menuList.appendChild(btn);
             });
